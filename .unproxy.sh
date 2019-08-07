@@ -12,4 +12,6 @@ unset IONIC_HTTP_PROXY
 npm config rm https-proxy
 npm config rm proxy
 
+tput setaf 4
 echo "**** PROXY and NPM environment settings succesfully unsetted."
+tput setaf 2
