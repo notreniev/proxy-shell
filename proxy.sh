@@ -76,11 +76,8 @@ else
     fi
 fi
 
-# verificar se está no diretório do projeto que contém os scripts
-# para só então rodar o install
-
 if [ ! -f $HOME/".proxy.sh" ] && [ ! -f $HOME/".unproxy.sh" ]; then
-    read -p "Would you like to install files on home user $HOME ? [Y/n]" -n 1 -r
+    read -p "Would you like to install file on home user $HOME ? [Y/n]" -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]];
     then
