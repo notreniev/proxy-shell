@@ -15,7 +15,7 @@ else
         tput setaf 1
         echo "**** You must be pass an argument like this, ex.: "
         tput setaf 3
-        echo "   ==> ./proxy.sh ./.proxy.sh user:password@proxy.mycompany.com:9999" 
+        echo "   ==> ./.proxy.sh user:password@proxy.mycompany.com:9999" 
         tput setaf 2
     else
         # arguments

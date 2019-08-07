@@ -11,3 +11,5 @@ unset IONIC_HTTP_PROXY
 
 npm config rm https-proxy
 npm config rm proxy
+
+echo "**** PROXY and NPM environment settings succesfully unsetted."
