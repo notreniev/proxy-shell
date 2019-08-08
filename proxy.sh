@@ -5,91 +5,143 @@
 # work deal with npm downloads.
 # Example usage: 
 #   ./proxy.sh ./.proxy.sh user:password@proxy.mycompany.com:9999
+#
+# Feel free to contribute
+# author: Everton Canez | notreniev@github.com
 
-if [ $1 == "--unproxy" ] || [ $1 == "-u" ]; then
-    ./$HOME/.unproxy.sh
-fi
+unproxy(){
+    clear
+    echo "--unproxy" $1
+    # unset previously variables before set them again to avoid to mess up anything
+    unset HTTP_PROXY
+    unset HTTPS_PROXY
+    npm config rm https-proxy
+    npm config rm proxy
 
-if [ $1 == "--help" ] || [ $1 == "-h" ]; then
     tput setaf 4
-    echo " "
-    echo "      usage: ./.proxy.sh user:password@proxy.mycompany.com:9999" 
+    echo "**** PROXY and NPM environment settings succesfully unsetted."
     echo " "
     tput setaf 2
-else
-    if [ ! $1 ]; then
-        tput setaf 2
-        clear
-        tput setaf 1
-        echo "**** You must be pass an argument like this, ex.: "
-        tput setaf 3
-        echo "      ./.proxy.sh user:password@proxy.mycompany.com:9999" 
-        echo " "
-        tput setaf 2
-    else
-        clear
+}
 
-        # unset previously variables before set them again to avoid to mess up anything
-        unset HTTP_PROXY
-        unset HTTPS_PROXY
-        unset IONIC_HTTP_PROXY
+help(){
+    clear
+    echo "--help"
+    echo " "
+    tput setaf 1
+    echo "   ** You must pass an argument like this: "
+    tput setaf 4
+    echo "      usage: proxy.sh user:password@proxy.mycompany.com:9999" 
+    echo " "
+    tput setaf 2
+}
 
-        npm config rm https-proxy
-        npm config rm proxy
+install(){
+    clear
+    echo "--install"
+        # verificar se está no diretório do projeto que contém os scripts
+        # para só então rodar o install
 
-        tput setaf 4
-        echo "**** PROXY and NPM environment settings succesfully unsetted."
-        echo " "
-        tput setaf 2
+    if [ -d "$HOME/.bin" ]; then
+        read -p "Would you like to install files on $HOME/.bin' ? [Y/n]" -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]];
+        then
+            rm -rf $HOME/.bin
+            mkdir $HOME/.bin
+            cp proxy.sh $HOME/.bin/proxy.sh
+            chmod +x $HOME/.bin/*
+            export PATH="$PATH:$HOME/.bin/proxy.sh"
+            tput setaf 4
+            echo "File installed on home user" $HOME
+            echo " "
+            
+            HAS_PATH="$(cat ~/.bash_profile | grep ".bin/")"
+            EXPORTED=${#HAS_PATH}
+
+            if [ $EXPORTED == 0 ]; then
+                export PATH="$HOME/.bin/:$PATH"
+                echo 'export PATH="$HOME/.bin/:$PATH"' >>~/.bash_profile
+            fi
+            echo env | grep "$HOME/.bin/proxy.sh"
+            tput setaf 2
+        else
+            exit
+        fi 
+    fi
+}
+
+run(){
+    clear
+    if [ $1 ] || [ $2 ]; then
+        
+        echo arguments: $@
+        url=""
 
         # arguments
-        url=$1;
+        if [ $1 == "--run" ];then
+            if [ ! $2 ]; then
+                echo "Inform de proxy url (user:password@proxy.mycompany.com:9999)"
+                read url
+            else
+                url=$2
+            fi
+        else
+            url=$1;
+        fi
 
-        tput setaf 2
-        echo Proxy URL:
-        echo $url;
         echo " "
-
-        # set variables for a new proxy session
-        export HTTP_PROXY=http://$url
-        export HTTPS_PROXY=https://$url
-        export IONIC_HTTP_PROXY=http://$url
-        npm config set https-proxy http://$url
-        npm config set proxy http://$url
-        npm config set strict-ssl false
-
-        #clear
         tput setaf 4
-        echo "**** Proxy environment settings ok."
-        
+        echo "**** Proxy URL:"
         tput setaf 3
-        env | grep "PROXY"
+        echo "****" $url;
         echo " "
-
-        tput setaf 4
-        echo "**** NPM environment settings ok."
-        
-        tput setaf 3
-        npm config get | grep "proxy"
         tput setaf 2
-        echo " "
-    fi
-fi
 
-if [ ! -f $HOME/".proxy.sh" ] && [ ! -f $HOME/".unproxy.sh" ]; then
-    read -p "Would you like to install file on home user $HOME ? [Y/n]" -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]];
-    then
-        mkdir $HOME/bin
-        cp proxy.sh $HOME/bin
-        cp unproxy.sh $HOME/bin
-        chmod +x $HOME/bin/*
-        export PATH="$PATH:$HOME/bin"
-        tput setaf 4
-        echo "Arquivo instalado na raíz do diretório do usuário"
-        tput setaf 2
+        if [ $url ]; then
+            set variables for a new proxy session
+            export HTTP_PROXY=http://$url
+            export HTTPS_PROXY=https://$url
+            export IONIC_HTTP_PROXY=http://$url
+            npm config set https-proxy http://$url
+            npm config set proxy http://$url
+            npm config set strict-ssl false
+
+            #clear
+            tput setaf 4
+            echo "**** Proxy environment settings ok."
+            
+            tput setaf 3
+            OUTPUT="$(env | grep "PROXY")"
+            echo "${OUTPUT}"
+            echo " "
+
+            tput setaf 4
+            echo "**** NPM environment settings ok."
+            
+            tput setaf 3
+            OUTPUT="$(npm config get | grep "proxy")"
+            echo "${OUTPUT}"
+            
+            tput setaf 2
+            echo " "
+        else
+            echo "No proxy URL informed "
+            echo " "
+            help 
+        fi
     else
-        exit
-    fi 
-fi
+        help 
+    fi
+}
+
+case $1 in
+    --unproxy) unproxy $1 ;;
+    -u) unproxy $1 ;;
+    --help) help $1 ;;
+    -h) help $1 ;;
+    --install) install $1 ;;
+    -i) install $1 ;;
+    --run) run $1 $2 ;;
+    *) run $1 $2;;
+esac
