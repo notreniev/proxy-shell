@@ -29,18 +29,18 @@ help(){
     echo "--help"
     echo " "
     tput setaf 1
-    echo "   ** You must pass an argument like this: "
+    echo " ** You must pass an argument like this: "
     tput setaf 4
-    echo "      common usage: proxy.sh user:password@proxy.mycompany.com:9999" 
+    echo "    common usage: proxy.sh user:password@proxy.mycompany.com:9999" 
     echo " "
-    echo "      ./proxy.sh -help"                                              # show command line options
-    echo "      ./proxy.sh -"                                                  # alias for --help option
-    echo "      ./proxy.sh --install"                                          # for install file on $HOME/.bin
-    echo "      ./proxy.sh -i"                                                 # alias for --install option
-    echo "      ./proxy.sh --unproxy"                                          # for install file on $HOME/.bin
-    echo "      ./proxy.sh -u"                                                 # alias for --unproxy option
-    echo "      ./proxy.sh --run user:password@proxy.mycompany.com:9999"       # set environment variables 
-    echo "      ./proxy.sh user:password@proxy.mycompany.com:9999"             # set environment variables withouy --run option
+    echo "    ./proxy.sh -help"                                              # show command line options
+    echo "    ./proxy.sh -"                                                  # alias for --help option
+    echo "    ./proxy.sh --install"                                          # for install file on $HOME/.bin
+    echo "    ./proxy.sh -i"                                                 # alias for --install option
+    echo "    ./proxy.sh --unproxy"                                          # for install file on $HOME/.bin
+    echo "    ./proxy.sh -u"                                                 # alias for --unproxy option
+    echo "    ./proxy.sh --run user:password@proxy.mycompany.com:9999"       # set environment variables 
+    echo "    ./proxy.sh user:password@proxy.mycompany.com:9999"             # set environment variables withouy --run option
     tput setaf 2
 }
 
