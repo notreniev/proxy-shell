@@ -1,6 +1,6 @@
-This shell scripts provides rapid proxy and npm config settings via command line to work deal with npm downloads.
+This is a "pet project" based on necessity to provide fast configuration for proxy and npm config settings via command line to deal with npm downloads.
 
-Put it on the root of your user folder and call it like this:
+Put it on the root of your user folder and call it or run -i option to install on yout home user:
 
 Install: 
 #   ./proxy.sh -i
