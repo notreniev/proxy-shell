@@ -40,7 +40,7 @@ help(){
     echo "    ./proxy.sh --unproxy"                                     # for install file on $HOME/.bin
     echo "    ./proxy.sh -u"                                            # alias for --unproxy option
     echo "    ./proxy.sh --run user:password@proxy.mycompany.com:9999"  # set environment variables 
-    echo "    ./proxy.sh user:password@proxy.mycompany.com:9999"        # set environment variables withouy --run option
+    echo "    ./proxy.sh user:password@proxy.mycompany.com:9999"        # set environment variables without --run option
     tput setaf 2
 }
 
