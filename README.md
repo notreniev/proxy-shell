@@ -7,7 +7,7 @@ Install:
 #   ./proxy.sh --install
 
 Example usage: 
-#   ˜proxy.sh user:password@proxy.mycompany.com:9999
+#      proxy.sh user:password@proxy.mycompany.com:9999
 
 Options: 
 #    ./proxy.sh -help                                              # show command line options
