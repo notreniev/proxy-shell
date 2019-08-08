@@ -107,15 +107,15 @@ run(){
         tput setaf 2
 
         if [ $url ]; then
-            set variables for a new proxy session
+            #set proxy variables for a new proxy session
             export HTTP_PROXY=http://$url
             export HTTPS_PROXY=https://$url
-            export IONIC_HTTP_PROXY=http://$url
+
+            #set npm variables for a new proxy session
             npm config set https-proxy http://$url
             npm config set proxy http://$url
             npm config set strict-ssl false
 
-            #clear
             tput setaf 4
             echo "**** Proxy environment settings ok."
             
