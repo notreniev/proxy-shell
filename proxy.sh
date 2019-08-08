@@ -31,7 +31,7 @@ help(){
     tput setaf 1
     echo "   ** You must pass an argument like this: "
     tput setaf 4
-    echo "      usage: proxy.sh user:password@proxy.mycompany.com:9999" 
+    echo "      common usage: proxy.sh user:password@proxy.mycompany.com:9999" 
     echo " "
     echo "      ./proxy.sh -help"                                              # show command line options
     echo "      ./proxy.sh -"                                                  # alias for --help option
