@@ -4,7 +4,7 @@
 # npm config settings via command line to 
 # work deal with npm downloads.
 # Example usage: 
-#   ./proxy.sh ./.proxy.sh user:password@proxy.mycompany.com:9999
+#   proxy.sh user:password@proxy.mycompany.com:9999
 #
 # Feel free to contribute
 # author: Everton Canez | notreniev@github.com
